@@ -1,3 +1,8 @@
 *.exe
 *.class
 *.pyc
+
+# IDE
+.vscode/
+*.sublime-project
+*.sublime-workspace
