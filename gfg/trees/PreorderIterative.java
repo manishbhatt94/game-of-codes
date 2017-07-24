@@ -53,8 +53,30 @@ public class PreorderIterative {
         System.out.println();
     }
 
+    public static void printInorder(Node root) {
+        if (root == null) {
+            return;
+        }
+        printInorder(root.left);
+        System.out.print(root.data + " ");
+        printInorder(root.right);
+    }
+
+    public static void printReverseInorder(Node root) {
+        if (root == null) {
+            return;
+        }
+        printReverseInorder(root.right);
+        System.out.print(root.data + " ");
+        printReverseInorder(root.left);
+    }
+
     public static void main(String[] args) {
         Node root = makeTree();
         printPreorderIterative(root);
+        printInorder(root);
+        System.out.println();
+        printReverseInorder(root);
+        System.out.println();
     }
 }
