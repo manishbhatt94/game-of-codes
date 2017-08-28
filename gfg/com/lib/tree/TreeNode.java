@@ -4,9 +4,10 @@ public class TreeNode {
     public int data;
     public TreeNode left;
     public TreeNode right;
+    public TreeNode parent;     // for use in BST
 
     public TreeNode() {
-        this.left = this.right = null;
+        this.left = this.right = this.parent = null;
     }
 
     public TreeNode(int data) {
