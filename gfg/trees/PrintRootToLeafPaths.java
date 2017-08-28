@@ -1,3 +1,5 @@
+package gfg.trees;
+
 import java.util.ArrayList;
 
 class Node {

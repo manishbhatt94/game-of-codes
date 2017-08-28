@@ -2,50 +2,33 @@ package gfg.com.lib.tree;
 
 import gfg.com.lib.tree.TreeNode;
 
-public class BinaryTree {
+public class BST {
     public TreeNode root;
-    private int preorderIndex;
 
-    public BinaryTree() {
+    public BST() {
         this.root = null;
     }
 
-    public BinaryTree(TreeNode root) {
+    public BST(TreeNode root) {
         this.root = root;
     }
 
-    private static int search(int[] arr, int start, int end, int key) {
-        for (int i = start; i <= end; ++i) {
-            if (arr[i] == key) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private TreeNode buildTreeInorderPreorderUtil(int[] in, int[] pre,
-        int inBeg, int inEnd) {
-
-        if (inBeg > inEnd) {
-            return null;
+    private TreeNode insertNodeUtil(TreeNode node, int key) {
+        if (node == null) {
+            return new TreeNode(key);
         }
 
-        TreeNode node = new TreeNode(pre[this.preorderIndex++]);
-
-        if (inBeg == inEnd) {
-            return node;
+        if (key < node.data) {
+            node.left = insertNodeUtil(node.left, key);
+        } else if (key > node.data) {
+            node.right = insertNodeUtil(node.right, key);
         }
-
-        int inIndex = search(in, inBeg, inEnd, node.data);
-        node.left = buildTreeInorderPreorderUtil(in, pre, inBeg, inIndex - 1);
-        node.right = buildTreeInorderPreorderUtil(in, pre, inIndex + 1, inEnd);
 
         return node;
     }
 
-    public void buildTreeFromInorderPreorder(int[] inorder, int[] preorder) {
-        this.preorderIndex = 0;
-        this.root = buildTreeInorderPreorderUtil(inorder, preorder, 0, inorder.length - 1);
+    public void insertNode(int key) {
+        this.root = this.insertNodeUtil(this.root, key);
     }
 
     private void printInorderUtil(TreeNode node) {
@@ -90,20 +73,30 @@ public class BinaryTree {
     }
 
     private TreeNode searchUtil(TreeNode node, int key) {
-        if (node == null) {
-            return null;
-        }
-        if (node.data == key) {
+        if (node == null || node.data == key) {
             return node;
         }
-        TreeNode result = searchUtil(node.left, key);
-        if (result == null) {
-            result = searchUtil(node.right, key);
+
+        if (key < node.data) {
+            return searchUtil(node.left, key);
         }
-        return result;
+        return searchUtil(node.right, key);
     }
 
     public TreeNode search(int key) {
         return this.searchUtil(this.root, key);
+    }
+
+    private void populateParentPointersUtil(TreeNode node, TreeNode parentNode) {
+        if (node == null) {
+            return;
+        }
+        node.parent = parentNode;
+        populateParentPointersUtil(node.left, node);
+        populateParentPointersUtil(node.right, node);
+    }
+
+    public void populateParentPointers() {
+        this.populateParentPointersUtil(this.root, null);
     }
 }

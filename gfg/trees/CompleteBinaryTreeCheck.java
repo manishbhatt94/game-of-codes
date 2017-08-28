@@ -31,13 +31,13 @@ public class CompleteBinaryTreeCheck {
     }
 
     /**
-     *          1
-     *        /   \
-     *       2     3
-     *     /  \    /\
-     *    4    5  6  7
-     *   / \  /
-     *  8  9 10
+     *             1
+     *           /   \
+     *          2     3
+     *        /  \    /\
+     *       4    5  6  7
+     *      / \  /
+     *     8  9 10
      */
     public static void makeSampleTree2(BinaryTree tree) {
         int inorder[] = { 8, 4, 9, 2, 10, 5, 1, 6, 3, 7 };
